@@ -9,7 +9,7 @@
             "port": 33060,
             "driver": "MySQL",
             "name": "test",
-            "database": "na_cities",
+            "database": "pixar",
             "username": "Cris",
             "connectionTimeout": 15
         }

@@ -121,3 +121,43 @@ LIMIT 5;
 SELECT Title FROM movies
 ORDER BY Title
 LIMIT 5 OFFSET 5;
+
+-- @block
+CREATE TABLE IF NOT EXISTS Boxoffice(
+    Movie_id INT NOT NULL PRIMARY KEY,
+    Rating FLOAT(24),
+    Domestic_sales INT,
+    International_sales INT
+);
+
+-- @block
+LOAD DATA INFILE "C:/ProgramData/MySQL/MySQL Server 8.0/Uploads/Boxoffice.csv"
+INTO TABLE Boxoffice
+FIELDS TERMINATED BY ","
+LINES TERMINATED BY "\n"
+IGNORE 1 ROWS;
+
+-- @block
+SELECT * from Boxoffice;
+
+-- @block
+-- Find the domestic and international sales for each movie
+SELECT Title, Domestic_sales, International_sales 
+FROM movies
+INNER JOIN Boxoffice
+ON movies.id = Boxoffice.Movie_id;
+
+-- @block
+-- Show the sales numbers for each movie that did better internationally 
+-- rather than domestically
+SELECT Title, International_sales, Domestic_sales FROM movies
+INNER JOIN Boxoffice
+ON movies.id = Boxoffice.Movie_id
+WHERE International_sales > Domestic_sales;
+
+-- @block
+-- List all the movies by their ratings in descending order
+SELECT Title, Rating FROM movies
+INNER JOIN Boxoffice
+ON movies.id = Boxoffice.Movie_id
+ORDER BY Rating DESC;
