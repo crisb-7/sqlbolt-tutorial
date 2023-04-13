@@ -161,3 +161,23 @@ SELECT Title, Rating FROM movies
 INNER JOIN Boxoffice
 ON movies.id = Boxoffice.Movie_id
 ORDER BY Rating DESC;
+
+-- @block
+-- List all movies and their combined sales in millions of dollars
+SELECT Title, (Domestic_sales + International_sales)/1000000 AS Total_sales
+FROM Boxoffice
+INNER JOIN Movies
+    ON Movie_id = Id;
+
+-- @block
+-- List all movies and their ratings in percent
+SELECT Title, Rating*10 AS Rating_percent
+FROM Boxoffice
+INNER JOIN Movies
+    ON Movie_id = Id;
+
+-- @block
+-- List all movies that were released on even number years
+SELECT Title, Year
+FROM Movies
+WHERE Year % 2 = 0;

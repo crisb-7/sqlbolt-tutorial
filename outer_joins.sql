@@ -30,7 +30,7 @@ IGNORE 1 ROWS;
 SELECT * FROM Buildings;
 
 -- @block
-SELECT * FROM employees;
+SELECT * FROM Employees;
 
 -- @block
 -- Find the list of all buildings that have employees 
@@ -48,3 +48,22 @@ SELECT * FROM Buildings; -- Very dumb?
 SELECT DISTINCT Building_name, Role FROM Buildings
 LEFT JOIN employees
     ON Building_name = Building;
+
+-- @block
+-- Test
+SELECT * FROM Buildings
+RIGHT JOIN Employees
+    ON Building_name = Building;
+
+-- @block
+-- Find the name and role of all employees who have not been assigned to a building
+-- (These rows are not in this table)
+SELECT Name, Role FROM Employees
+WHERE Building IS NULL;
+
+-- @block
+-- Find the names of the buildings that hold no employees
+SELECT Building_name, Role FROM Buildings
+LEFT JOIN Employees
+    ON Building_name = Building
+WHERE Role IS NULL;
