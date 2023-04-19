@@ -67,3 +67,28 @@ SELECT Building_name, Role FROM Buildings
 LEFT JOIN Employees
     ON Building_name = Building
 WHERE Role IS NULL;
+
+-- @block
+-- Find the longest time that an employee has been at the studio
+select max(Years_employed) from employees;
+
+-- @block
+-- For each role, find the average number of years 
+-- employed by employees in that role
+select Role, avg(Years_employed) from employees
+GROUP BY Role;
+
+-- @block
+-- Find the total number of employee years worked in each building
+select Building, sum(Years_employed) from employees
+GROUP BY Building;
+
+-- @block
+-- Find the number of Artists in the studio (without a HAVING clause)
+select count(Name) from employees
+where Role like "Artist";
+
+-- @block
+-- Find the number of Employees of each role in the studio
+select Role, count(Role) from employees
+group by Role;
